@@ -1,0 +1,116 @@
+Download and install
+1. docker
+2. VS code editor
+3. DBeaver ide for postgress
+
+
+error Docker Desktop - WSL not installed
+powershell
+
+wsl --list --online
+
+wsl --install -d <Distribution Name> ##like Ubuntu 
+
+or
+
+wsl --install
+
+restart the pc
+
+open powershell and run below commands
+
+mkdir docker,.github/workflows,consumer,data-generator,kafka-debezium,postgress
+
+ni README.md -itemType file
+ni .gitignore -itemType file
+ni docker-compose.yml -itemType file
+ni dockerfile-airflow.dockerfile -itemType file
+ni .env -itemType file
+
+paste the contents of on the files
+
+Create and start the containers using docker compose file
+docker compose -f docker-compose.yml up -d
+
+Airflow not running in browser fix the errors below
+
+docker compose exec airflow-webserver airflow db init
+
+docker compose exec airflow-webserver airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin
+
+now verify by opening on browser
+
+---> connect to postgress db using DBeaver tool
+create tables
+
+---> data generation
+
+install python 3.13 or 3.12 manually if not already and install additional library/package in requirement.txt
+
+python -m pip install -r .\requirements.txt
+
+python .\data-generator\faker_generator.py
+
+---> create source connector using Debezium that send records into Kafka, Once configured, Debezium streams all changes to a Kafka topic
+python .\generate_and_post_connector.py
+
+-->Create s3 bucket name raw
+
+--->create consumer to consume kafka topic created in above steps
+
+py.exe .\kafka_to_minio.py
+
+error : Unable to bootstrap from host.docker.internal:29092
+
+fix -- use KAFKA_BOOTSTRAP=localhost:9092 because we are connecting from outside container(from our pc)
+
+----- create and run DAGs to pull files from S3 to snowflake raw schema
+
+---- install dbt core/git
+
+mkdir banking_dbt 
+cd banking_dbt
+
+python -m venv dbt_env
+dbt_env\Scripts\activate
+python -m pip install --upgrade pip wheel setuptools
+pip install dbt-core dbt-snowflake
+
+dbt --version
+
+dbt init 
+
+dbt debug --config-dir
+
+dbt snapshot
+dbt run
+
+
+
+----- configure dbt to be run from Airflow
+remove macro from dbt_project file
+
+
+-------- add repo to git
+
+---------- cleanup 
+
+docker stop $(docker ps -aq)
+docker container prune -f
+docker system prune -a -f
+docker system prune -a --volumes -f
+
+or
+Using the Docker Desktop GUIOpen the Docker Desktop application.Click the Troubleshoot (bug icon) in the top right menu.Select Clean / Purge data.Check the data boxes you want to clear (e.g., WSL 2) and confirm
+
+
+Compact the WSL2 Virtual Disk (Crucial for Windows)
+
+wsl --shutdown
+
+diskpart
+
+select vdisk file="C:\Users\nandk\AppData\Local\Docker\wsl\disk\docker_data.vhdx" -- check the file/directory
+
+compact vdisk
+
