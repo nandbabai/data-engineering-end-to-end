@@ -1,4 +1,4 @@
-{{ config(materialized='incremental', unique_key='transaction_id') }}
+{{ config(materialized='incremental') }}
 
 SELECT
     t.transaction_id,
