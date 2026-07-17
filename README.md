@@ -18,7 +18,7 @@ We simulate **customer, account, and transaction data**, stream changes in real 
 ---
 ## 🏗️ Architecture  
 
-<img width="5647" height="3107" alt="Architecture" src="Data engineering architecture.png" />
+<img width="5647" height="3107" alt="Architecture" src="Data engineering architecture new.png" />
 
 
 **Pipeline Flow:**
