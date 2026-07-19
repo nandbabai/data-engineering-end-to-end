@@ -80,8 +80,8 @@ data-engineering-end-to-end/
 ├── docker-compose.yml         # Containerized infra
 ├── dockerfile-airflow.dockerfile
 ├── requirements.txt
-├── .streamlit/secrets.toml
-├── appy.py
+├── dashboard/.streamlit/secrets.toml
+├── dashboard/appy.py
 └── README.md
 ```
 
