@@ -68,6 +68,9 @@ data-engineering-end-to-end/
 │   └── dbt_project.yml
 ├── consumer
 │   └── kafka_to_minio.py
+├── dashboard/
+    └── .streamlit/secrets.toml   #secrete to store snowflake connection
+    └── appy.py                # Dashboard python code
 ├── data-generator/            # Faker-based data simulator
 │   └── faker_generator.py
 ├── docker/                    # Airflow DAGs, plugins, etc.
@@ -80,8 +83,6 @@ data-engineering-end-to-end/
 ├── docker-compose.yml         # Containerized infra
 ├── dockerfile-airflow.dockerfile
 ├── requirements.txt
-├── dashboard/.streamlit/secrets.toml
-├── dashboard/appy.py
 └── README.md
 ```
 
