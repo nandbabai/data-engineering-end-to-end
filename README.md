@@ -137,6 +137,6 @@ data-engineering-end-to-end/
 - **CI/CD workflows** ensuring reliability  
 
 ---
-**Author**: *Nand*
-
+**Author**: *Nand Kumar Sahu*
+**Email**: *nandkumarsh222@gmail.com*
 **Video**: https://youtu.be/DTMZH6rqQCY
